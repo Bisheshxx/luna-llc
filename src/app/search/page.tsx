@@ -23,6 +23,7 @@ import Link from "next/link";
 import { Product } from "@/types";
 import { ArrowUp, Star } from "lucide-react";
 import Image from "next/image";
+import { categories, products } from "@/StaticData";
 
 export default function Component() {
   const [filters, setFilters] = useState<any>({
@@ -35,65 +36,10 @@ export default function Component() {
   });
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchTerm, setSearchTerm] = useState("");
-  const products: Product[] = [
-    {
-      id: 1,
-      name: "Acme Wireless Headphones",
-      brand: "Acme",
-      category: "Electronics",
-      price: 79.99,
-      rating: 4.5,
-    },
-    {
-      id: 2,
-      name: "Blitz Gaming Mouse",
-      brand: "Blitz",
-      category: "Electronics",
-      price: 49.99,
-      rating: 4.2,
-    },
-    {
-      id: 3,
-      name: "Zen Yoga Mat",
-      brand: "Zen",
-      category: "Sports",
-      price: 29.99,
-      rating: 4.8,
-    },
-    {
-      id: 4,
-      name: "Lush Throw Pillow",
-      brand: "Lush",
-      category: "Home",
-      price: 39.99,
-      rating: 4.3,
-    },
-    {
-      id: 5,
-      name: "Vigor Fitness Tracker",
-      brand: "Vigor",
-      category: "Electronics",
-      price: 59.99,
-      rating: 4.6,
-    },
-    {
-      id: 6,
-      name: "Cozy Knit Blanket",
-      brand: "Cozy",
-      category: "Home",
-      price: 69.99,
-      rating: 4.7,
-    },
-  ];
+
   const filteredProducts = useMemo(() => {
     return products.filter(
       (product: Product) => {
-        if (
-          filters.brand.length > 0 &&
-          !filters.brand.includes(product.brand)
-        ) {
-          return false;
-        }
         if (
           filters.category.length > 0 &&
           !filters.category.includes(product.category)
@@ -104,9 +50,6 @@ export default function Component() {
           product.price < filters.minPrice ||
           product.price > filters.maxPrice
         ) {
-          return false;
-        }
-        if (product.rating < filters.rating) {
           return false;
         }
         if (

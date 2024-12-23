@@ -1,4 +1,4 @@
-import { Categories, Product } from "@/types";
+import { Cart, Categories, Product } from "@/types";
 
 export const products: Product[] = [
   {
@@ -87,5 +87,32 @@ export const categories: Categories[] = [
     name: "Saree",
     images:
       "https://www.roopdarshan.co.nz/cdn/shop/files/lavender-embroidered-trendy-saree-285578-1000x1375.jpg?v=1720135540",
+  },
+];
+
+export const cart: Cart[] = [
+  {
+    id: 1,
+    name: "Acme Circles T-Shirt",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTttZ28gPqNOQ_4ZIIduJjr0hctHUcFfJ1aXA&s",
+    quantity: 2,
+    price: 29.99,
+  },
+  {
+    id: 2,
+    name: "Autumn Mug",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTttZ28gPqNOQ_4ZIIduJjr0hctHUcFfJ1aXA&s",
+    quantity: 1,
+    price: 12.99,
+  },
+  {
+    id: 3,
+    name: "Fall Fragrance Candle",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTttZ28gPqNOQ_4ZIIduJjr0hctHUcFfJ1aXA&s",
+    quantity: 3,
+    price: 16.99,
   },
 ];

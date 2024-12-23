@@ -17,3 +17,11 @@ export interface Categories {
   name: string;
   images?: string;
 }
+
+export interface Cart {
+  id: number;
+  name: string;
+  image: string;
+  quantity: number;
+  price: number;
+}
