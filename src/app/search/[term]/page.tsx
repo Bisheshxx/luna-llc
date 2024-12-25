@@ -24,8 +24,10 @@ import { Product } from "@/types";
 import { ArrowUp, Star } from "lucide-react";
 import Image from "next/image";
 import { categories, products } from "@/StaticData";
+import { useParams } from "next/navigation";
 
 export default function Component() {
+  const { term } = useParams();
   const [filters, setFilters] = useState<any>({
     brand: [],
     category: [],
@@ -35,7 +37,7 @@ export default function Component() {
     rating: 0,
   });
   const [sortOrder, setSortOrder] = useState("asc");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState(term);
 
   const filteredProducts = useMemo(() => {
     return products.filter(

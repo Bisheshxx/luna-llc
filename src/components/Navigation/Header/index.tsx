@@ -23,21 +23,31 @@ import React, { useEffect, useState } from "react";
 import Logo from "../../../../public/logo.png";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 const NavBar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
-  useEffect(() => {
-    setIsCartOpen(false);
-    setIsMenuOpen(false);
-  }, [pathname]);
+  const router = useRouter();
+
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
   };
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+  const search = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      const inputValue = (e.target as HTMLInputElement).value;
+      // console.log(inputValue);
+      router.push("/search/inputValue");
+    }
+  };
+
+  useEffect(() => {
+    setIsCartOpen(false);
+    setIsMenuOpen(false);
+  }, [pathname]);
   return (
     <>
       <header className="h-20 grid md:grid-cols-3 grid-cols-2 ">
@@ -52,6 +62,7 @@ const NavBar = () => {
               type="search"
               placeholder="Search"
               className="w-full border-0 h-8 font-semibold"
+              onChange={search}
             />
           </div>
         </div>
@@ -114,7 +125,15 @@ const NavBar = () => {
         }`}
       >
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-bold">Your Cart</h2>
+          <div className="flex items-center w-full max-w-sm space-x-2  px-3.5 py-2">
+            <SearchIcon className="h-4 w-4" />
+            <Input
+              type="search"
+              placeholder="Search"
+              className="w-full border-0 h-8 font-semibold"
+              onKeyDown={search}
+            />
+          </div>
           <Button
             variant="ghost"
             size="icon"
