@@ -18,7 +18,7 @@ import {
   XIcon,
 } from "lucide-react";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEventHandler, useEffect, useState } from "react";
 // import Logo from "@/public/logo.png";
 import Logo from "../../../../public/logo.png";
 import Image from "next/image";
@@ -27,6 +27,7 @@ import { usePathname, useRouter } from "next/navigation";
 const NavBar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("");
   const pathname = usePathname();
   const router = useRouter();
 
@@ -36,13 +37,27 @@ const NavBar = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
   const search = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      const inputValue = (e.target as HTMLInputElement).value;
-      // console.log(inputValue);
-      router.push("/search/inputValue");
+      // Get the value of the input field
+      router.push(`/search/${inputValue}`);
+      // Example of using the value
+      // router.push("/search?query=" + (e.target as HTMLInputElement).value);
     }
   };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value); // Handle input change
+  };
+
+  // const search = (e: ChangeEventHandler<HTMLInputElement>) => {
+  //   if (e.key === "Enter") {
+  //     const inputValue = (e.target as HTMLInputElement).value;
+  //     // console.log(inputValue);
+  //     router.push("/search/inputValue");
+  //   }
+  // };
 
   useEffect(() => {
     setIsCartOpen(false);
@@ -62,7 +77,8 @@ const NavBar = () => {
               type="search"
               placeholder="Search"
               className="w-full border-0 h-8 font-semibold"
-              onChange={search}
+              onChange={handleChange}
+              onKeyDown={search}
             />
           </div>
         </div>
@@ -131,6 +147,7 @@ const NavBar = () => {
               type="search"
               placeholder="Search"
               className="w-full border-0 h-8 font-semibold"
+              onChange={handleChange}
               onKeyDown={search}
             />
           </div>

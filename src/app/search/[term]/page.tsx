@@ -37,7 +37,7 @@ export default function Component() {
     rating: 0,
   });
   const [sortOrder, setSortOrder] = useState("asc");
-  const [searchTerm, setSearchTerm] = useState(term);
+  const [searchTerm, setSearchTerm] = useState<string>(term as string);
 
   const filteredProducts = useMemo(() => {
     return products.filter(
