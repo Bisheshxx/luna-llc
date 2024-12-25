@@ -17,7 +17,7 @@ const ProductWindow = ({ title, price, image, button }: IProps) => {
         <CardContent className="flex flex-col items-center text-center gap-4 p-8">
           {/* Image Section */}
           {image ? (
-            <div className="relative h-80 w-64">
+            <div className="relative md:h-80 md:w-64 w-36 h-48">
               <Image
                 src={image}
                 alt={`${title} image`}

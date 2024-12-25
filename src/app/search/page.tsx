@@ -234,7 +234,7 @@ export default function Component() {
           </div>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <Card className="relative group">
-              <Link href="#" className="absolute inset-0 z-10" prefetch={false}>
+              <Link href="" className="absolute inset-0 z-10" prefetch={false}>
                 <span className="sr-only">View Example</span>
               </Link>
               <CardContent>
