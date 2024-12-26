@@ -26,7 +26,7 @@ import Image from "next/image";
 import { categories, products } from "@/StaticData";
 import { useParams } from "next/navigation";
 
-export default function Component() {
+export default function Search() {
   const { term } = useParams();
   const [filters, setFilters] = useState<any>({
     brand: [],
@@ -40,36 +40,27 @@ export default function Component() {
   const [searchTerm, setSearchTerm] = useState<string>(term as string);
 
   const filteredProducts = useMemo(() => {
-    return products.filter(
-      (product: Product) => {
-        if (
-          filters.category.length > 0 &&
-          !filters.category.includes(product.category)
-        ) {
-          return false;
-        }
-        if (
-          product.price < filters.minPrice ||
-          product.price > filters.maxPrice
-        ) {
-          return false;
-        }
-        if (
-          searchTerm.length > 0 &&
-          !product.name.toLowerCase().includes(searchTerm.toLowerCase())
-        ) {
-          return false;
-        }
-        return true;
+    return products.filter((product: Product) => {
+      if (
+        filters.category.length > 0 &&
+        !filters.category.includes(product.category)
+      ) {
+        return false;
       }
-      //   .sort((a: any, b: any) => {
-      //     if (sortOrder === "asc") {
-      //       return a.price - b.price;
-      //     } else {
-      //       return b.price - a.price;
-      //     }
-      //   })
-    );
+      if (
+        product.price < filters.minPrice ||
+        product.price > filters.maxPrice
+      ) {
+        return false;
+      }
+      if (
+        searchTerm.length > 0 &&
+        !product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
+        return false;
+      }
+      return true;
+    });
   }, [filters, sortOrder, searchTerm]);
   const handleFilterChange = (type: any, value: any) => {
     setFilters((prevFilters: any) => {
@@ -256,43 +247,6 @@ export default function Component() {
                 </div>
               </CardContent>
             </Card>
-            {/* {filteredProducts.map((product: any) => (
-              <Card key={product.id} className="relative group">
-                <Link
-                  href="#"
-                  className="absolute inset-0 z-10"
-                  prefetch={false}
-                >
-                  <span className="sr-only">View {product.name}</span>
-                </Link>
-                <CardContent>
-                  <img
-                    src="/placeholder.svg"
-                    alt={product.name}
-                    width={300}
-                    height={300}
-                    className="rounded-lg object-cover w-full aspect-square group-hover:opacity-50 transition-opacity"
-                  />
-                  <div className="flex-1 py-4">
-                    <h3 className="font-semibold tracking-tight">
-                      {product.name}
-                    </h3>
-                    <div className="flex items-center gap-2 text-sm">
-                      <div className="flex items-center gap-0.5">
-                        <Star className="w-5 h-5 fill-primary" />
-                        <span>{product.rating.toFixed(1)}</span>
-                      </div>
-                      <span className="text-muted-foreground">
-                        ({product.category})
-                      </span>
-                    </div>
-                    <h4 className="font-semibold">
-                      ${product.price.toFixed(2)}
-                    </h4>
-                  </div>
-                </CardContent>
-              </Card>
-            ))} */}
           </div>
         </div>
       </div>

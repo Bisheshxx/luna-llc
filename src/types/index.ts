@@ -25,3 +25,7 @@ export interface Cart {
   quantity: number;
   price: number;
 }
+export interface Route {
+  routeName: string;
+  route: string;
+}

@@ -1,13 +1,7 @@
 "use client";
 import CartComponent from "@/components/Cart";
 import { Input } from "@/components/ui/input";
-import {
-  SignedOut,
-  SignInButton,
-  SignedIn,
-  UserButton,
-  GoogleOneTap,
-} from "@clerk/nextjs";
+import { SignedOut, SignInButton, SignedIn, UserButton } from "@clerk/nextjs";
 import {
   HamIcon,
   Menu,
@@ -18,18 +12,37 @@ import {
   XIcon,
 } from "lucide-react";
 import Link from "next/link";
-import React, { ChangeEventHandler, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 // import Logo from "@/public/logo.png";
 import Logo from "../../../../public/logo.png";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
+import { Route } from "@/types";
 const NavBar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const pathname = usePathname();
   const router = useRouter();
+  const routes: Route[] = [
+    {
+      routeName: "Home",
+      route: "/",
+    },
+    {
+      routeName: "About",
+      route: "/about",
+    },
+    {
+      routeName: "Collection",
+      route: "/collection",
+    },
+    {
+      routeName: "Contact",
+      route: "/contact",
+    },
+  ];
 
   const toggleCart = () => {
     setIsCartOpen(!isCartOpen);
@@ -40,24 +53,13 @@ const NavBar = () => {
 
   const search = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      // Get the value of the input field
       router.push(`/search/${inputValue}`);
-      // Example of using the value
-      // router.push("/search?query=" + (e.target as HTMLInputElement).value);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value); // Handle input change
   };
-
-  // const search = (e: ChangeEventHandler<HTMLInputElement>) => {
-  //   if (e.key === "Enter") {
-  //     const inputValue = (e.target as HTMLInputElement).value;
-  //     // console.log(inputValue);
-  //     router.push("/search/inputValue");
-  //   }
-  // };
 
   useEffect(() => {
     setIsCartOpen(false);
@@ -103,28 +105,16 @@ const NavBar = () => {
               <UserButton />
             </SignedIn>
           </Link>
-          <Link
-            href="/products"
-            className="text-sm font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            About
-          </Link>
-          <Link
-            href="/search"
-            className="text-sm font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Collection
-          </Link>
-          <Link
-            href="/search"
-            className="text-sm font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Contact
-          </Link>
-
+          {routes.map((route: Route) => (
+            <Link
+              href={route.route}
+              className={`text-sm font-medium hover:underline underline-offset-4 ${pathname === route.route && "underline"}`}
+              prefetch={false}
+              key={route.route}
+            >
+              {route.routeName}
+            </Link>
+          ))}
           <Link
             href="#"
             className="text-sm font-medium hover:underline underline-offset-4"
@@ -160,13 +150,19 @@ const NavBar = () => {
           </Button>
         </div>
         <nav className="flex flex-col gap-8">
-          <Link
-            href="/"
-            className="text-sm font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Home
-          </Link>
+          {routes.map((route: Route) => {
+            if (route.route !== pathname)
+              return (
+                <Link
+                  href={route.route}
+                  className={`text-sm font-medium hover:underline underline-offset-4 ${pathname === route.route && "underline"}`}
+                  prefetch={false}
+                  key={route.route}
+                >
+                  {route.routeName}
+                </Link>
+              );
+          })}
           <SignedOut>
             <Link
               href="#"
@@ -176,27 +172,6 @@ const NavBar = () => {
               <SignInButton mode="modal" />
             </Link>
           </SignedOut>
-          <Link
-            href="/products"
-            className="text-sm font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            About
-          </Link>
-          <Link
-            href="/search"
-            className="text-sm font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Collection
-          </Link>
-          <Link
-            href="/search"
-            className="text-sm font-medium hover:underline underline-offset-4"
-            prefetch={false}
-          >
-            Contact
-          </Link>
         </nav>
       </div>
     </>
