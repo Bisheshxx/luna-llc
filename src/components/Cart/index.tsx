@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import useStore from "@/store";
+import Link from "next/link";
 
 interface IProps {
   isCartOpen: boolean;
@@ -68,7 +69,7 @@ const CartComponent = ({ isCartOpen, toggleCart }: IProps) => {
         <span className="font-medium">$2</span>
       </div>
       <div className="flex justify-center items-center">
-        <Button> Proceed to Check Out</Button>
+        <Link href={"/cart"}> Proceed to Check Out</Link>
       </div>
     </div>
   );

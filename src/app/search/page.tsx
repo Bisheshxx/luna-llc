@@ -24,6 +24,7 @@ import { Product } from "@/types";
 import { ArrowUp, Star } from "lucide-react";
 import Image from "next/image";
 import { useParams, useSearchParams } from "next/navigation";
+import useStore from "@/store";
 
 export default function Search() {
   const searchParams = useSearchParams();
@@ -40,6 +41,7 @@ export default function Search() {
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchTerm, setSearchTerm] = useState<string>(term || "");
 
+  const { productStore } = useStore();
   // const filteredProducts = useMemo(() => {
   //   return products.filter((product: Product) => {
   //     if (
@@ -205,6 +207,7 @@ export default function Search() {
                 placeholder="Search products..."
                 value={searchTerm}
                 onChange={(e) => handleSearch(e.target.value)}
+                className="bg-white"
               />
             </div>
             <DropdownMenu>
@@ -230,27 +233,37 @@ export default function Search() {
             </DropdownMenu>
           </div>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <Card className="relative group">
-              <Link href="" className="absolute inset-0 z-10" prefetch={false}>
-                <span className="sr-only">View Example</span>
-              </Link>
-              <CardContent>
-                <Image
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTttZ28gPqNOQ_4ZIIduJjr0hctHUcFfJ1aXA&s"
-                  alt={"example"}
-                  width={300}
-                  height={300}
-                  className="rounded-lg object-cover w-full aspect-square group-hover:opacity-50 transition-opacity"
-                />
-                <div className="flex-1 py-4">
-                  <h3 className="font-semibold tracking-tight">Example</h3>
-                  <div className="flex items-center gap-2 text-sm">
-                    <span className="text-muted-foreground">Example</span>
+            {productStore.map((product: Product) => (
+              <Card className="relative group" key={product.id}>
+                <Link
+                  href={`/product/${product.id}`}
+                  className="absolute inset-0 z-10"
+                  prefetch={false}
+                >
+                  <span className="sr-only">{product.name}</span>
+                </Link>
+                <CardContent>
+                  <Image
+                    src={product.image}
+                    alt={"example"}
+                    width={300}
+                    height={300}
+                    className="rounded-lg object-cover w-full aspect-square group-hover:opacity-50 transition-opacity my-5"
+                  />
+                  <div className="flex-1 py-4">
+                    <h3 className="font-semibold tracking-tight">
+                      {product.name}
+                    </h3>
+                    <div className="flex items-center gap-2 text-sm">
+                      <span className="text-muted-foreground">
+                        {product.category}
+                      </span>
+                    </div>
+                    <h4 className="font-semibold">${product.price}</h4>
                   </div>
-                  <h4 className="font-semibold">$123</h4>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </div>

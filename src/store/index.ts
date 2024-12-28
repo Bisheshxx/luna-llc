@@ -27,7 +27,7 @@ const products = [
     image: Kurtha1,
   },
   {
-    category: "Kurtha 2",
+    category: "Kurtha",
     price: 123,
     name: "Kurtha 3",
     id: "2",
@@ -36,7 +36,7 @@ const products = [
     image: Kurtha2,
   },
   {
-    category: "Saree 2",
+    category: "Saree",
     price: 123,
     name: "Saree 2",
     id: "3",
@@ -45,7 +45,7 @@ const products = [
     image: Saree2,
   },
   {
-    category: "Kurtha 4",
+    category: "Kurtha",
     price: 123,
     name: "Kurtha 1",
     id: "4",

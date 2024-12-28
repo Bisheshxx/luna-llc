@@ -17,7 +17,7 @@ import { Cart, Product, Size } from "@/types";
 
 const ProductsPage = () => {
   const params = useParams();
-  const { productStore, addToCart, cart } = useStore();
+  const { productStore, addToCart } = useStore();
   const product: Product = productStore[Number(params.slug)];
   const [cartItem, setCartItem] = useState<Cart>({
     id: Number(params.slug),
@@ -30,7 +30,6 @@ const ProductsPage = () => {
   const addToCartButton = () => {
     addToCart(cartItem);
   };
-  console.log(cart);
   return (
     <div className="grid md:grid-cols-2 items-start max-w-3xl px-4 mx-auto py-6 gap-6 md:gap-12 flex-1">
       <div className="grid gap-4 md:gap-10">
