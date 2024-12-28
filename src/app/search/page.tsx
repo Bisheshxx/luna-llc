@@ -23,7 +23,6 @@ import Link from "next/link";
 import { Product } from "@/types";
 import { ArrowUp, Star } from "lucide-react";
 import Image from "next/image";
-import { categories, products } from "@/StaticData";
 import { useParams, useSearchParams } from "next/navigation";
 
 export default function Search() {
@@ -41,29 +40,29 @@ export default function Search() {
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchTerm, setSearchTerm] = useState<string>(term || "");
 
-  const filteredProducts = useMemo(() => {
-    return products.filter((product: Product) => {
-      if (
-        filters.category.length > 0 &&
-        !filters.category.includes(product.category)
-      ) {
-        return false;
-      }
-      if (
-        product.price < filters.minPrice ||
-        product.price > filters.maxPrice
-      ) {
-        return false;
-      }
-      if (
-        searchTerm.length > 0 &&
-        !product.name.toLowerCase().includes(searchTerm.toLowerCase())
-      ) {
-        return false;
-      }
-      return true;
-    });
-  }, [filters, sortOrder, searchTerm]);
+  // const filteredProducts = useMemo(() => {
+  //   return products.filter((product: Product) => {
+  //     if (
+  //       filters.category.length > 0 &&
+  //       !filters.category.includes(product.category)
+  //     ) {
+  //       return false;
+  //     }
+  //     if (
+  //       product.price < filters.minPrice ||
+  //       product.price > filters.maxPrice
+  //     ) {
+  //       return false;
+  //     }
+  //     if (
+  //       searchTerm.length > 0 &&
+  //       !product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  //     ) {
+  //       return false;
+  //     }
+  //     return true;
+  //   });
+  // }, [filters, sortOrder, searchTerm]);
   const handleFilterChange = (type: any, value: any) => {
     setFilters((prevFilters: any) => {
       if (type === "brand") {

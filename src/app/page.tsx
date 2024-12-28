@@ -29,9 +29,8 @@ export default function Home() {
             <div className="flex mt-24 justify-evenly">
               {categories && categories.length > 1 ? (
                 categories.map((category, index) => (
-                  <div>
+                  <div key={index}>
                     <div
-                      key={index}
                       className={`basis-1/3 flex justify-center transition duration-500 hover:scale-125`}
                     >
                       <Image

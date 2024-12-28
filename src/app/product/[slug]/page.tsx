@@ -15,7 +15,7 @@ import Image from "next/image";
 import useStore from "@/store";
 import { Cart, Product, Size } from "@/types";
 
-const Product = () => {
+const ProductsPage = () => {
   const params = useParams();
   const { productStore, addToCart, cart } = useStore();
   const product: Product = productStore[Number(params.slug)];
@@ -127,4 +127,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default ProductsPage;

@@ -4,7 +4,6 @@ import { Separator } from "@radix-ui/react-separator";
 import { ArrowDown, ArrowUp, Minus, Plus, Trash, XIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { cart } from "@/StaticData";
 import Image from "next/image";
 import useStore from "@/store";
 
