@@ -1,82 +1,85 @@
-import { categories, products } from "@/StaticData";
+"use client";
+import { categories } from "@/StaticData";
 import Banner from "@/components/Banner";
 import HomeCarousel from "@/components/CarouselHome";
 import ProductWindow from "@/components/ProductWindow";
-import { Button } from "@/components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import useStore from "@/store";
 import { Product } from "@/types";
-
-import {
-  Facebook,
-  Instagram,
-  LocateIcon,
-  Phone,
-  Power,
-  Rocket,
-  Shield,
-} from "lucide-react";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const { productStore } = useStore();
+  const router = useRouter();
   return (
-    <div className="flex flex-col min-h-screen">
-      <main className="flex-1">
-        <section className="w-full py-24 bg-gray-100 dark:bg-gray-800">
+    <div className="flex flex-col">
+      <main>
+        <section className="w-full py-24 bg-green">
           <Banner />
         </section>
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6 mx-auto">
-            <div className="flex justify-between items-end">
-              <h2 className="text-3xl font-bold tracking-tighter  sm:text-4xl md:text-5xl">
+            <div className="flex justify-center">
+              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl flex justify-center">
                 {`Categories`}
               </h2>
-              <span className="cursor-pointer">View More</span>
             </div>
-            <HomeCarousel>
-              <CarouselContent>
-                {categories && categories.length > 1 ? (
-                  categories.map((category, index) => (
-                    <CarouselItem
-                      className={`md:basis-1/4 basis-1/2`}
+            <div className="flex mt-24 justify-evenly">
+              {categories && categories.length > 1 ? (
+                categories.map((category, index) => (
+                  <div>
+                    <div
                       key={index}
+                      className={`basis-1/3 flex justify-center transition duration-500 hover:scale-125`}
                     >
-                      <ProductWindow
-                        title={category.name}
-                        image={category.images}
+                      <Image
+                        src={category.images as StaticImport}
+                        alt={category.name}
+                        className="rounded-full bg-black h-24 w-24 md:h-[400px] md:w-[400px]"
+                        style={{
+                          // height: "400px",
+                          // width: "400px",
+                          objectFit: "cover",
+                        }}
+                        height={200}
+                        width={200}
                       />
-                    </CarouselItem>
-                  ))
-                ) : (
-                  <>No Data</>
-                )}
-              </CarouselContent>
-            </HomeCarousel>
+                    </div>
+                    <div className="flex justify-center text-sm md:text-2xl mt-10">
+                      {category.name}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <>No Data</>
+              )}
+            </div>
           </div>
         </section>
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
           <div className="container px-4 md:px-6 mx-auto">
             <div className="flex justify-between items-end">
               <h2 className="text-3xl font-bold tracking-tighter  sm:text-4xl md:text-5xl">
-                {`What's New`}
+                {`Our Products`}
               </h2>
               <span className="cursor-pointer">View More</span>
             </div>
             <HomeCarousel>
               <CarouselContent>
-                {products.length > 0 ? (
-                  products.map((product: Product) => (
+                {productStore.length > 0 ? (
+                  productStore.map((product: Product, index: number) => (
                     <CarouselItem
                       className={`md:basis-1/4 basis-1/2`}
-                      key={product.id}
+                      key={index}
+                      onClick={() => router.push(`/product/${index}`)}
                     >
                       <ProductWindow
                         title={product.name}
                         price={product.price}
+                        image={product.image}
+                        button="Add to Cart"
                       />
                     </CarouselItem>
                   ))
@@ -102,33 +105,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <footer className="w-full py-4 md:py-8 lg:py-12 bg-gray-100 dark:bg-gray-800">
-          <div className="container px-4 md:px-6 mx-auto">
-            <div className="flex justify-between items-end">
-              <h2 className="text-3xl font-bold tracking-tighter  sm:text-4xl md:text-5xl">
-                Contact us
-              </h2>
-            </div>
-            <div className="flex justify-between">
-              <div className="flex flex-col gap-4 mt-4">
-                <div className="flex gap-4">
-                  <Instagram /> LunaIG
-                </div>
-                <div className="flex gap-4">
-                  <Facebook /> LunaFB
-                </div>
-              </div>
-              <div>
-                <div className="flex gap-4">
-                  <Phone /> LunaPhone
-                </div>
-                <div className="flex gap-4">
-                  <LocateIcon /> Location
-                </div>
-              </div>
-            </div>
-          </div>
-        </footer>
       </main>
     </div>
   );

@@ -3,12 +3,11 @@
 @tailwind utilities;
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 50, 37%, 87%;
     --foreground: 0 0% 3.9%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -72,4 +71,10 @@ body {
 }
 .cl-footer {
   display: none;
+}
+.cl-internal-df7v37 {
+  display: none !important;
+}
+.cl-internal-1hp5nqm {
+  display: none !important;
 }

@@ -2,29 +2,20 @@
 import CartComponent from "@/components/Cart";
 import { Input } from "@/components/ui/input";
 import { SignedOut, SignInButton, SignedIn, UserButton } from "@clerk/nextjs";
-import {
-  HamIcon,
-  Menu,
-  MoonStar,
-  Mountain,
-  SearchIcon,
-  ShoppingCart,
-  XIcon,
-} from "lucide-react";
+import { Menu, SearchIcon, ShoppingCart, XIcon } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-// import Logo from "@/public/logo.png";
-import Logo from "../../../../public/logo.png";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { usePathname, useRouter } from "next/navigation";
 import { Route } from "@/types";
+import useStore from "@/store";
 const NavBar = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const pathname = usePathname();
   const router = useRouter();
+  const { productStore } = useStore();
   const routes: Route[] = [
     {
       routeName: "Home",
@@ -36,7 +27,7 @@ const NavBar = () => {
     },
     {
       routeName: "Collection",
-      route: "/collection",
+      route: "/search?heading=Collection",
     },
     {
       routeName: "Contact",
@@ -53,7 +44,8 @@ const NavBar = () => {
 
   const search = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      router.push(`/search/${inputValue}`);
+      // router.push(`/search/${inputValue}`);
+      router.push(`/search?term=${inputValue}`);
     }
   };
 
@@ -68,8 +60,12 @@ const NavBar = () => {
   return (
     <>
       <header className="h-20 grid md:grid-cols-3 grid-cols-2 ">
-        <Link href="/" className="flex items-center px-8" prefetch={false}>
-          <Image src={Logo} alt="Logo" height={100} width={100} />
+        <Link
+          href="/"
+          className="flex items-center px-8 text-2xl"
+          prefetch={false}
+        >
+          Luna
         </Link>
 
         <div className="md:flex items-center justify-center hidden ">

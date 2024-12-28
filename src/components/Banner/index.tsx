@@ -22,11 +22,11 @@ const Banner = () => {
       }}
       plugins={[
         Autoplay({
-          delay: 2000,
+          delay: 3500,
           stopOnInteraction: false,
         }),
       ]}
-      className="mt-8"
+      className="mt-8 "
     >
       <CarouselContent>
         <CarouselItem>

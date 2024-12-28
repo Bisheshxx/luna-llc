@@ -1,27 +1,27 @@
 import React from "react";
 import { Card, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 interface IProps {
   title: string;
   price?: number; // Use lowercase `number` for TypeScript.
-  image?: string;
+  image?: string | StaticImageData;
   button?: string;
 }
 
 const ProductWindow = ({ title, price, image, button }: IProps) => {
   return (
     <div>
-      <Card>
+      <Card className="cursor-pointer">
         <CardContent className="flex flex-col items-center text-center gap-4 p-8">
           {/* Image Section */}
           {image ? (
-            <div className="relative md:h-80 md:w-64 w-36 h-48">
+            <div className="relative md:h-80 md:w-64 w-36 h-48 ">
               <Image
                 src={image}
                 alt={`${title} image`}
-                className="rounded-md"
+                className="rounded-md object-cover"
                 fill
                 style={{
                   height: "100%",

@@ -1,9 +1,12 @@
+import { StaticImageData } from "next/image";
+
 export interface Product {
   category: string;
   price: number;
   name: string;
   id: string;
   description: string;
+  image: string | StaticImageData;
 }
 
 export interface Filters {
@@ -15,16 +18,15 @@ export interface Filters {
 }
 export interface Categories {
   name: string;
-  images?: string;
+  images?: string | StaticImageData;
 }
 
 export interface Cart {
   id: number;
-  name: string;
-  image: string;
   quantity: number;
-  price: number;
+  size: Size;
 }
+export type Size = "S" | "M" | "L" | "XL";
 export interface Route {
   routeName: string;
   route: string;

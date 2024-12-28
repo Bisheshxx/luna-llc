@@ -24,10 +24,12 @@ import { Product } from "@/types";
 import { ArrowUp, Star } from "lucide-react";
 import Image from "next/image";
 import { categories, products } from "@/StaticData";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 export default function Search() {
-  const { term } = useParams();
+  const searchParams = useSearchParams();
+  const term = searchParams.get("term");
+  const heading = searchParams.get("heading");
   const [filters, setFilters] = useState<any>({
     brand: [],
     category: [],
@@ -37,7 +39,7 @@ export default function Search() {
     rating: 0,
   });
   const [sortOrder, setSortOrder] = useState("asc");
-  const [searchTerm, setSearchTerm] = useState<string>(term as string);
+  const [searchTerm, setSearchTerm] = useState<string>(term || "");
 
   const filteredProducts = useMemo(() => {
     return products.filter((product: Product) => {
@@ -113,7 +115,10 @@ export default function Search() {
     setSearchTerm(term);
   };
   return (
-    <div className="container mx-auto px-4 md:px-6 py-8">
+    <div className="container mx-auto px-4 md:px-6 py-8 flex-1">
+      <h1 className="text-2xl my-10 font-bold">
+        {heading ? heading : "Search Results"}
+      </h1>
       <div className="grid md:grid-cols-[250px_1fr] gap-8">
         <div className="grid gap-6">
           <Card>
