@@ -41,7 +41,7 @@ const ProductWindow = ({ title, price, image, button }: IProps) => {
           {/* Price */}
           {price && (
             <p className="text-gray-500 dark:text-gray-400">
-              ${price.toFixed(2)}
+              ¥ {price.toFixed(2)}
             </p>
           )}
 

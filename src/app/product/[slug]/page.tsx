@@ -49,7 +49,7 @@ const ProductsPage = () => {
               <p>{product.description}</p>
             </div>
           </div>
-          <div className="text-4xl font-bold ml-auto">${product.price}</div>
+          <div className="text-4xl font-bold ml-auto">¥{product.price}</div>
         </div>
         <div className="grid gap-4 md:gap-10">
           <div className="grid gap-2">

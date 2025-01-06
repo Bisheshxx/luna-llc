@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 import {
   Card,
   CardHeader,
@@ -23,25 +23,70 @@ import Link from "next/link";
 import { Product } from "@/types";
 import { ArrowUp, Star } from "lucide-react";
 import Image from "next/image";
-import { useParams, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import useStore from "@/store";
 
 export default function Search() {
   const searchParams = useSearchParams();
   const term = searchParams.get("term");
   const heading = searchParams.get("heading");
+  const { productStore } = useStore();
   const [filters, setFilters] = useState<any>({
-    brand: [],
     category: [],
     priceRange: [0, 100],
-    minPrice: 0,
-    maxPrice: 100,
-    rating: 0,
   });
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchTerm, setSearchTerm] = useState<string>(term || "");
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const items =
+      heading === "BackInStore"
+        ? productStore.filter((product: Product) => product.tag === "BIS")
+        : productStore.filter((product: Product) => product.tag !== "BIS");
+    setProducts(items);
+  }, [heading, productStore]);
 
-  const { productStore } = useStore();
+  const filteredProducts = products
+    .filter((product: Product) => {
+      // Category filter
+      if (
+        filters.category.length > 0 &&
+        !filters.category.includes(product.category)
+      ) {
+        return false;
+      }
+      // Price range filter
+      if (
+        product.price < filters.minPrice ||
+        product.price > filters.maxPrice
+      ) {
+        return false;
+      }
+      // Search term filter
+      if (
+        searchTerm.length > 0 &&
+        !product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
+        return false;
+      }
+      return true;
+    })
+    .sort((a: Product, b: Product) => {
+      return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
+    });
+
+  const handleFilterChange = (type: string, value: any) => {
+    setFilters((prevFilters: any) => {
+      if (type === "category") {
+        const updatedCategories = prevFilters.category.includes(value)
+          ? prevFilters.category.filter((cat: string) => cat !== value)
+          : [...prevFilters.category, value];
+        return { ...prevFilters, category: updatedCategories };
+      } else {
+        return { ...prevFilters, [type]: value };
+      }
+    });
+  };
   // const filteredProducts = useMemo(() => {
   //   return products.filter((product: Product) => {
   //     if (
@@ -65,50 +110,6 @@ export default function Search() {
   //     return true;
   //   });
   // }, [filters, sortOrder, searchTerm]);
-  const handleFilterChange = (type: any, value: any) => {
-    setFilters((prevFilters: any) => {
-      if (type === "brand") {
-        return {
-          ...prevFilters,
-          brand: prevFilters.brand.includes(value)
-            ? prevFilters.brand.filter((item: any) => item !== value)
-            : [...prevFilters.brand, value],
-        };
-      } else if (type === "category") {
-        return {
-          ...prevFilters,
-          category: prevFilters.category.includes(value)
-            ? prevFilters.category.filter((item: any) => item !== value)
-            : [...prevFilters.category, value],
-        };
-      } else if (type === "priceRange") {
-        return {
-          ...prevFilters,
-          priceRange: value,
-          minPrice: value[0],
-          maxPrice: value[1],
-        };
-      } else if (type === "minPrice") {
-        return {
-          ...prevFilters,
-          minPrice: value,
-          priceRange: [value, prevFilters.maxPrice],
-        };
-      } else if (type === "maxPrice") {
-        return {
-          ...prevFilters,
-          maxPrice: value,
-          priceRange: [prevFilters.minPrice, value],
-        };
-      } else if (type === "rating") {
-        return {
-          ...prevFilters,
-          rating: value,
-        };
-      }
-      return prevFilters;
-    });
-  };
   const handleSortChange = (order: any) => {
     setSortOrder(order);
   };
@@ -135,33 +136,33 @@ export default function Search() {
                   <div className="grid gap-2">
                     <Label className="flex items-center gap-2 font-normal">
                       <Checkbox
-                        id="category-electronics"
-                        checked={filters.category.includes("Electronics")}
+                        id="category-Kurtha"
+                        checked={filters.category.includes("Kurtha")}
                         onCheckedChange={() =>
-                          handleFilterChange("category", "Electronics")
+                          handleFilterChange("category", "Kurtha")
                         }
                       />
                       Kurtha
                     </Label>
                     <Label className="flex items-center gap-2 font-normal">
                       <Checkbox
-                        id="category-sports"
-                        checked={filters.category.includes("Sports")}
+                        id="category-Saree"
+                        checked={filters.category.includes("Saree")}
                         onCheckedChange={() =>
-                          handleFilterChange("category", "Sports")
+                          handleFilterChange("category", "Saree")
                         }
                       />
                       Saree
                     </Label>
                     <Label className="flex items-center gap-2 font-normal">
                       <Checkbox
-                        id="category-home"
-                        checked={filters.category.includes("Home")}
+                        id="category-Lehenga"
+                        checked={filters.category.includes("Lehenga")}
                         onCheckedChange={() =>
-                          handleFilterChange("category", "Home")
+                          handleFilterChange("category", "Lehenga")
                         }
                       />
-                      Accessories
+                      Lehenga
                     </Label>
                   </div>
                 </div>
@@ -195,13 +196,10 @@ export default function Search() {
                 </div>
               </div>
             </CardContent>
-            <CardFooter className="flex justify-end">
-              <Button variant="outline">Apply</Button>
-            </CardFooter>
           </Card>
         </div>
         <div className="grid gap-6">
-          <div className="flex items-center gap-4">
+          <div className="flex gap-4">
             <div className="flex-1">
               <Input
                 placeholder="Search products..."
@@ -233,37 +231,39 @@ export default function Search() {
             </DropdownMenu>
           </div>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {productStore.map((product: Product) => (
-              <Card className="relative group" key={product.id}>
-                <Link
-                  href={`/product/${product.id}`}
-                  className="absolute inset-0 z-10"
-                  prefetch={false}
-                >
-                  <span className="sr-only">{product.name}</span>
-                </Link>
-                <CardContent>
-                  <Image
-                    src={product.image}
-                    alt={"example"}
-                    width={300}
-                    height={300}
-                    className="rounded-lg object-cover w-full aspect-square group-hover:opacity-50 transition-opacity my-5"
-                  />
-                  <div className="flex-1 py-4">
-                    <h3 className="font-semibold tracking-tight">
-                      {product.name}
-                    </h3>
-                    <div className="flex items-center gap-2 text-sm">
-                      <span className="text-muted-foreground">
-                        {product.category}
-                      </span>
+            {filteredProducts.length > 0 &&
+              filteredProducts.map((product: Product) => (
+                <Card className="relative group" key={product.id}>
+                  <Link
+                    href={`/product/${product.id}`}
+                    className="absolute inset-0 z-10"
+                    prefetch={false}
+                  >
+                    <span className="sr-only">{product.name}</span>
+                  </Link>
+                  <CardContent>
+                    <Image
+                      src={product.image}
+                      alt={"example"}
+                      width={300}
+                      height={300}
+                      className="rounded-lg object-cover w-full aspect-square group-hover:opacity-50 transition-opacity my-5"
+                    />
+                    <div className="flex-1 py-4">
+                      <h3 className="font-semibold tracking-tight">
+                        {product.name}
+                      </h3>
+                      <div className="flex items-center gap-2 text-sm">
+                        <span className="text-muted-foreground">
+                          {product.category}
+                        </span>
+                      </div>
+                      <h4 className="font-semibold">${product.price}</h4>
                     </div>
-                    <h4 className="font-semibold">${product.price}</h4>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              ))}
+            {/* <PaginationComponent /> */}
           </div>
         </div>
       </div>

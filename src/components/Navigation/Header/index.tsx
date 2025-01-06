@@ -30,8 +30,12 @@ const NavBar = () => {
       route: "/search?heading=Collection",
     },
     {
-      routeName: "Contact",
-      route: "/contact",
+      routeName: "FAQ",
+      route: "/faq",
+    },
+    {
+      routeName: "Terms&Conditions",
+      route: "/terms",
     },
   ];
 
@@ -88,7 +92,7 @@ const NavBar = () => {
 
           <Menu className="h-5 w-5 mr-2" onClick={toggleMenu} />
         </div>
-        <nav className="hidden md:flex gap-8 items-center justify-end px-8">
+        <nav className="hidden md:flex gap-5 items-center justify-end px-8">
           <Link
             href="#"
             className="text-sm font-medium hover:underline underline-offset-4"

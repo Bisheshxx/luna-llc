@@ -68,6 +68,10 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+  ul,
+  ol {
+    list-style: revert;
+  }
 }
 .cl-footer {
   display: none;
@@ -77,4 +81,7 @@ body {
 }
 .cl-internal-1hp5nqm {
   display: none !important;
+}
+ul > li::marker {
+  content: "";
 }

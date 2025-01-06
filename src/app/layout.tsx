@@ -9,7 +9,7 @@ import Footer from "@/components/Footer";
 
 const roboto = Roboto({
   subsets: ["latin"],
-  weight: ["300"], // Add weights as needed
+  weight: ["300", "700"], // Add weights as needed
   variable: "--font-roboto", // Optional CSS variable name
 });
 
@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${roboto.variable} antialiased light `}>
+      <body className={` ${roboto.className} antialiased light `}>
         <Providers>
           <div className="flex flex-col min-h-screen ">
             <NavBar />

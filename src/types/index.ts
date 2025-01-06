@@ -7,6 +7,7 @@ export interface Product {
   id: string;
   description: string;
   image: string | StaticImageData;
+  tag?: string;
 }
 
 export interface Filters {
@@ -30,4 +31,9 @@ export type Size = "S" | "M" | "L" | "XL";
 export interface Route {
   routeName: string;
   route: string;
+}
+
+export interface IFAQ {
+  question: string;
+  answer: string;
 }
