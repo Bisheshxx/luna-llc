@@ -227,6 +227,21 @@ const useStore: any = create((set) => ({
   },
   addToCart: (item: Cart) =>
     set((state: Store) => {
+      const duplicateIndex = state.cartStore.findIndex(
+        (obj) => obj.id === item.id
+      );
+      if (duplicateIndex !== -1) {
+        const quantity =
+          state.cartStore[duplicateIndex].quantity + item.quantity;
+        const updatedCart = [...state.cartStore];
+        updatedCart[duplicateIndex] = {
+          ...updatedCart[duplicateIndex],
+          quantity: quantity,
+          price: item.price * quantity,
+        };
+
+        return { cartStore: updatedCart };
+      }
       return {
         cartStore: [...state.cartStore, item],
       };

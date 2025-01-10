@@ -30,6 +30,7 @@ export default function Search() {
   const searchParams = useSearchParams();
   const term = searchParams.get("term");
   const heading = searchParams.get("heading");
+  const category = searchParams.get("category");
   const { productStore } = useStore();
   const [filters, setFilters] = useState<any>({
     category: [],
@@ -46,6 +47,15 @@ export default function Search() {
     setProducts(items);
   }, [heading, productStore]);
 
+  useEffect(() => {
+    if (category) {
+      setFilters({
+        ...filters,
+        category: [...filters.category, category],
+      });
+    }
+  }, [category]);
+
   const filteredProducts = products
     .filter((product: Product) => {
       // Category filter
@@ -53,6 +63,7 @@ export default function Search() {
         filters.category.length > 0 &&
         !filters.category.includes(product.category)
       ) {
+        console.log(filters.category);
         return false;
       }
       // Price range filter
@@ -87,29 +98,6 @@ export default function Search() {
       }
     });
   };
-  // const filteredProducts = useMemo(() => {
-  //   return products.filter((product: Product) => {
-  //     if (
-  //       filters.category.length > 0 &&
-  //       !filters.category.includes(product.category)
-  //     ) {
-  //       return false;
-  //     }
-  //     if (
-  //       product.price < filters.minPrice ||
-  //       product.price > filters.maxPrice
-  //     ) {
-  //       return false;
-  //     }
-  //     if (
-  //       searchTerm.length > 0 &&
-  //       !product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  //     ) {
-  //       return false;
-  //     }
-  //     return true;
-  //   });
-  // }, [filters, sortOrder, searchTerm]);
   const handleSortChange = (order: any) => {
     setSortOrder(order);
   };

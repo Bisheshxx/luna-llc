@@ -10,12 +10,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { Route } from "@/types";
 import useStore from "@/store";
 const NavBar = () => {
+  const { cartStore } = useStore();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const pathname = usePathname();
   const router = useRouter();
-  const { productStore } = useStore();
   const routes: Route[] = [
     {
       routeName: "Home",
@@ -34,7 +34,7 @@ const NavBar = () => {
       route: "/faq",
     },
     {
-      routeName: "Terms&Conditions",
+      routeName: "Terms",
       route: "/terms",
     },
   ];
@@ -89,7 +89,6 @@ const NavBar = () => {
             <UserButton />
           </SignedIn>
           <ShoppingCart onClick={toggleCart} className="h-5 w-5 mr-2" />
-
           <Menu className="h-5 w-5 mr-2" onClick={toggleMenu} />
         </div>
         <nav className="hidden md:flex gap-5 items-center justify-end px-8">
@@ -97,14 +96,7 @@ const NavBar = () => {
             href="#"
             className="text-sm font-medium hover:underline underline-offset-4"
             prefetch={false}
-          >
-            <SignedOut>
-              <SignInButton mode="modal" />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-          </Link>
+          ></Link>
           {routes.map((route: Route) => (
             <Link
               href={route.route}
@@ -115,13 +107,29 @@ const NavBar = () => {
               {route.routeName}
             </Link>
           ))}
+
           <Link
             href="#"
             className="text-sm font-medium hover:underline underline-offset-4"
             prefetch={false}
           >
-            <ShoppingCart onClick={toggleCart} className="h-5 w-5 mr-2" />
+            <div className="relative">
+              {cartStore.length > 0 && (
+                <div className="absolute z-10 bg-black text-white text-xs h-4 w-4 rounded-full top-[-5px] right-[-5px] flex items-center justify-center">
+                  {cartStore.length}
+                </div>
+              )}
+              <ShoppingCart onClick={toggleCart} className="h-5 w-5 mr-2" />
+            </div>
           </Link>
+          <SignedOut>
+            <div className="text-sm bg-black py-1 px-4 text-white rounded-lg">
+              <SignInButton mode="modal" />
+            </div>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </nav>
       </header>
       <CartComponent isCartOpen={isCartOpen} toggleCart={toggleCart} />

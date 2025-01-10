@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/Navigation/Header";
-import { PageBreadCrumb } from "@/components/page-bread-crumb";
 
 import Providers from "@/HOC/Providers";
 import Footer from "@/components/Footer";
+import { Toaster } from "@/components/ui/toaster";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -31,6 +31,7 @@ export default function RootLayout({
             <NavBar />
             {children}
             <Footer />
+            <Toaster />
           </div>
         </Providers>
       </body>

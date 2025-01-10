@@ -29,7 +29,7 @@ export default function CartPage() {
               key={cart.id}
               className="grid gap-4 p-4 md:grid-cols-3 md:gap-4"
             >
-              <div className="flex gap-4 md:col-span-2 items-center">
+              <div className="flex gap-4 md:col-span-3 items-center">
                 <Image
                   src={productStore[cart.id].image}
                   alt="Product image"
@@ -61,7 +61,7 @@ export default function CartPage() {
               </div>
               <div className="flex flex-col items-center justify-center gap-1.5">
                 <div className="flex items-center gap-1">
-                  <div className="w-20 md:w-24" />
+                  <div className="w-20 md:w-24 sm:hidden" />
                   <Button variant="ghost" size="icon">
                     <TrashIcon className="w-4 h-4" />
                     <span className="sr-only">Delete</span>
@@ -71,32 +71,32 @@ export default function CartPage() {
             </Card>
           ))
         ) : (
-          <>No Item</>
-        )}
-        <Card className="p-4">
-          <div className="grid gap-2 md:grid-cols-2">
-            <div className="flex items-center justify-between">
-              <div>Subtotal</div>
-              <div>$99.00</div>
-            </div>
-            <div className="flex items-center justify-between">
-              <div>Shipping</div>
-              <div>$10.00</div>
-            </div>
-            <div className="flex items-center justify-between">
-              <div>Tax</div>
-              <div>$10.90</div>
-            </div>
-            <Separator className="w-full" />
-            <div className="flex items-center justify-between font-medium">
-              <div>Total</div>
-              <div>$119.90</div>
-            </div>
+          <div className="w-full h-80 flex justify-center items-center">
+            No Item
           </div>
-        </Card>
-        <Button size="lg" className="w-full">
-          Proceed to checkout
-        </Button>
+        )}
+        {cartStore.length > 0 && (
+          <>
+            <Card className="p-4">
+              <div className="grid gap-2 md:grid-cols-2">
+                <div className="flex items-center justify-between font-medium">
+                  <div>Total</div>
+                  <div>
+                    {" "}
+                    ¥{" "}
+                    {cartStore.reduce(
+                      (sum: number, item: Cart) => sum + item.price,
+                      0
+                    )}
+                  </div>
+                </div>
+              </div>
+            </Card>
+            <Button size="lg" className="w-full">
+              Proceed to checkout
+            </Button>
+          </>
+        )}
       </div>
     </div>
   );

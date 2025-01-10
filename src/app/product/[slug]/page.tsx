@@ -14,21 +14,28 @@ import React, { useState } from "react";
 import Image from "next/image";
 import useStore from "@/store";
 import { Cart, Product, Size } from "@/types";
+import { useToast } from "@/hooks/use-toast";
 
 const ProductsPage = () => {
   const params = useParams();
   const { productStore, addToCart } = useStore();
   const product: Product = productStore[Number(params.slug)];
+  const { toast } = useToast();
+
   const [cartItem, setCartItem] = useState<Cart>({
     id: Number(params.slug),
     quantity: 1,
     size: "S",
+    price: product.price,
   });
   const handleChange = (value: string) => {
     setCartItem({ ...cartItem, quantity: Number(value) });
   };
   const addToCartButton = () => {
-    addToCart(cartItem);
+    addToCart({ ...cartItem });
+    toast({
+      title: "Added to Cart",
+    });
   };
   return (
     <div className="grid md:grid-cols-2 items-start max-w-3xl px-4 mx-auto py-6 gap-6 md:gap-12 flex-1">

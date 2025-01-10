@@ -1,5 +1,5 @@
 "use client";
-import { categories } from "@/StaticData";
+import { StaticDataSEO, categories } from "@/StaticData";
 import Banner from "@/components/Banner";
 import HomeCarousel from "@/components/CarouselHome";
 import ProductWindow from "@/components/ProductWindow";
@@ -8,6 +8,7 @@ import useStore from "@/store";
 import { Product } from "@/types";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -29,7 +30,7 @@ export default function Home() {
             <div className="flex mt-24 justify-evenly">
               {categories && categories.length > 1 ? (
                 categories.map((category, index) => (
-                  <div key={index}>
+                  <Link href={category.url} key={index}>
                     <div
                       className={`basis-1/3 flex justify-center transition duration-500 hover:scale-125`}
                     >
@@ -49,7 +50,7 @@ export default function Home() {
                     <div className="flex justify-center text-sm md:text-2xl mt-10">
                       {category.name}
                     </div>
-                  </div>
+                  </Link>
                 ))
               ) : (
                 <>No Data</>
@@ -60,10 +61,18 @@ export default function Home() {
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800">
           <div className="container px-4 md:px-6 mx-auto">
             <div className="flex justify-between items-end">
-              <h2 className="text-3xl font-bold tracking-tighter  sm:text-4xl md:text-5xl">
+              <h2
+                className="text-3xl font-bold tracking-tighter  sm:text-4xl md:text-5xl cursor-pointer"
+                onClick={() => router.push("/search")}
+              >
                 {`Our Products`}
               </h2>
-              <span className="cursor-pointer">View More</span>
+              <span
+                className="cursor-pointer"
+                onClick={() => router.push("/search")}
+              >
+                View More
+              </span>
             </div>
             <HomeCarousel>
               <CarouselContent>
@@ -78,7 +87,7 @@ export default function Home() {
                         title={product.name}
                         price={product.price}
                         image={product.image}
-                        button="Add to Cart"
+                        button="View Product"
                       />
                     </CarouselItem>
                   ))
@@ -93,13 +102,10 @@ export default function Home() {
           <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6 mx-auto">
             <div className="space-y-3">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                About Us
+                {StaticDataSEO[0].heading}
               </h2>
               <p className="mx-auto max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa,
-                recusandae consectetur ea animi in nisi porro esse sit fugit
-                odit voluptates omnis incidunt molestiae? Dolor nulla magnam rem
-                aliquam alias.
+                {StaticDataSEO[0].content}
               </p>
             </div>
           </div>

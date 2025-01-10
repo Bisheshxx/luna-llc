@@ -20,12 +20,14 @@ export interface Filters {
 export interface Categories {
   name: string;
   images?: string | StaticImageData;
+  url: string;
 }
 
 export interface Cart {
   id: number;
   quantity: number;
   size: Size;
+  price: number;
 }
 export type Size = "S" | "M" | "L" | "XL";
 export interface Route {
