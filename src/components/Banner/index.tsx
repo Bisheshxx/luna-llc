@@ -39,11 +39,11 @@ const Banner = () => {
                 Welcome to Luna
               </h1>
               <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                Bringing Nepal's timeless elegance to Japan. Each piece in our
+                {`  Bringing Nepal's timeless elegance to Japan. Each piece in our
                 collection carries the warmth of Nepalese craftsmanship and the
                 stories of our heritage. Discover the perfect blend of tradition
                 and grace, carefully curated to make you feel beautiful and
-                connected to our rich cultural tapestry.
+                connected to our rich cultural tapestry.`}
               </p>
             </div>
           </div>
@@ -71,7 +71,7 @@ const Banner = () => {
                 Back in stock
               </h1>
               <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                We're excited to announce that several of our beloved items
+                {`We're excited to announce that several of our beloved items`}
               </p>
               <Button
                 onClick={() => router.push("/search?heading=BackInStore")}
