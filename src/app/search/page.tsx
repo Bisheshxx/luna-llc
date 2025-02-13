@@ -34,7 +34,7 @@ export default function Search() {
   const { productStore } = useStore();
   const [filters, setFilters] = useState<any>({
     category: [],
-    priceRange: [0, 100],
+    priceRange: undefined,
   });
   const [sortOrder, setSortOrder] = useState("asc");
   const [searchTerm, setSearchTerm] = useState<string>(term || "");
@@ -63,7 +63,6 @@ export default function Search() {
         filters.category.length > 0 &&
         !filters.category.includes(product.category)
       ) {
-        console.log(filters.category);
         return false;
       }
       // Price range filter
@@ -85,7 +84,6 @@ export default function Search() {
     .sort((a: Product, b: Product) => {
       return sortOrder === "asc" ? a.price - b.price : b.price - a.price;
     });
-
   const handleFilterChange = (type: string, value: any) => {
     setFilters((prevFilters: any) => {
       if (type === "category") {
@@ -164,8 +162,8 @@ export default function Search() {
                       <Input
                         type="number"
                         id="min-price"
-                        value={filters.minPrice}
-                        onChange={(e) =>
+                        value={filters.minPrice ? filters.minPrice : ""}
+                        onChange={e =>
                           handleFilterChange("minPrice", Number(e.target.value))
                         }
                         className="w-24"
@@ -173,12 +171,27 @@ export default function Search() {
                       <Input
                         type="number"
                         id="max-price"
-                        value={filters.maxPrice}
-                        onChange={(e) =>
+                        value={filters.maxPrice ? filters.maxPrice : ""}
+                        onChange={e =>
                           handleFilterChange("maxPrice", Number(e.target.value))
                         }
                         className="w-24"
                       />
+                      <div>
+                        <Button
+                          variant="outline"
+                          className="bg-black text-white"
+                          onClick={() => {
+                            setFilters({
+                              ...filters,
+                              minPrice: undefined,
+                              maxPrice: undefined,
+                            });
+                          }}
+                        >
+                          Clear
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -192,7 +205,7 @@ export default function Search() {
               <Input
                 placeholder="Search products..."
                 value={searchTerm}
-                onChange={(e) => handleSearch(e.target.value)}
+                onChange={e => handleSearch(e.target.value)}
                 className="bg-white"
               />
             </div>

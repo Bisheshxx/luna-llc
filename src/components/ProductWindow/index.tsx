@@ -14,10 +14,10 @@ const ProductWindow = ({ title, price, image, button }: IProps) => {
   return (
     <div>
       <Card className="cursor-pointer">
-        <CardContent className="flex flex-col items-center text-center gap-4 p-8">
+        <CardContent className="flex flex-col items-center text-center gap-6 md:p-8 p-4">
           {/* Image Section */}
           {image ? (
-            <div className="relative md:h-80 md:w-64 w-36 h-48 ">
+            <div className="relative md:h-80 md:w-64 w-28 h-32 ">
               <Image
                 src={image}
                 alt={`${title} image`}
@@ -35,7 +35,7 @@ const ProductWindow = ({ title, price, image, button }: IProps) => {
             </div>
           )}
           {/* Title */}
-          <h3 className="md:text-sm text-xs font-bold">{title}</h3>
+          <h3 className="md:text-sm text-xs font-bold h-7">{title}</h3>
           {/* Price */}
           {price && (
             <p className="text-gray-500 dark:text-gray-400">
@@ -43,11 +43,7 @@ const ProductWindow = ({ title, price, image, button }: IProps) => {
             </p>
           )}
           {/* Button */}
-          {button && (
-            <Button size="lg" className="mt-4">
-              {button}
-            </Button>
-          )}
+          {button && <Button className="md:mt-4 mt-2">{button}</Button>}
         </CardContent>
       </Card>
     </div>

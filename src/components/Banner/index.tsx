@@ -9,8 +9,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
+import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 const Banner = () => {
+  const router = useRouter();
   return (
     <Carousel
       opts={{
@@ -36,10 +39,11 @@ const Banner = () => {
                 Welcome to Luna
               </h1>
               <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus,
-                culpa excepturi hic doloribus architecto officia alias, pariatur
-                quos, voluptates asperiores blanditiis magnam? Ut soluta
-                laboriosam tempora qui inventore dicta animi.
+                Bringing Nepal's timeless elegance to Japan. Each piece in our
+                collection carries the warmth of Nepalese craftsmanship and the
+                stories of our heritage. Discover the perfect blend of tradition
+                and grace, carefully curated to make you feel beautiful and
+                connected to our rich cultural tapestry.
               </p>
             </div>
           </div>
@@ -51,10 +55,11 @@ const Banner = () => {
                 Best Sellers
               </h1>
               <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus,
-                culpa excepturi hic doloribus architecto officia alias, pariatur
-                quos, voluptates asperiores blanditiis magnam? Ut soluta
-                laboriosam tempora qui inventore dicta animi.
+                Discover our most cherished pieces that have captured hearts
+                across Japan. From intricately woven pashminas to stunning
+                traditional wear, these favorites blend Nepalese artistry with
+                contemporary style. Each piece tells a story of heritage and
+                craftsmanship that our customers have fallen in love with.
               </p>
             </div>
           </div>
@@ -66,11 +71,13 @@ const Banner = () => {
                 Back in stock
               </h1>
               <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus,
-                culpa excepturi hic doloribus architecto officia alias, pariatur
-                quos, voluptates asperiores blanditiis magnam? Ut soluta
-                laboriosam tempora qui inventore dicta animi.
+                We're excited to announce that several of our beloved items
               </p>
+              <Button
+                onClick={() => router.push("/search?heading=BackInStore")}
+              >
+                Shop Now
+              </Button>
             </div>
           </div>
         </CarouselItem>
