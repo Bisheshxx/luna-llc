@@ -34,17 +34,14 @@ const ProductWindow = ({ title, price, image, button }: IProps) => {
               <span className="text-gray-500">No Image</span>
             </div>
           )}
-
           {/* Title */}
-          <h3 className="md:text-xl text-sm font-bold">{title}</h3>
-
+          <h3 className="md:text-sm text-xs font-bold">{title}</h3>
           {/* Price */}
           {price && (
             <p className="text-gray-500 dark:text-gray-400">
               ¥ {price.toFixed(2)}
             </p>
           )}
-
           {/* Button */}
           {button && (
             <Button size="lg" className="mt-4">

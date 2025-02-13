@@ -26,7 +26,7 @@ const products = [
   {
     category: "Saree",
     price: 7700,
-    name: "Saree 3",
+    name: "Mint Green Printed Saree",
     id: "0",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -35,7 +35,7 @@ const products = [
   {
     category: "Saree",
     price: 3850,
-    name: "Saree 2",
+    name: "Black and White Chiffon Saree",
     id: "1",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -44,7 +44,7 @@ const products = [
   {
     category: "Saree",
     price: 7700,
-    name: "Saree 3",
+    name: "Maroon Silk Saree",
     id: "2",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -53,7 +53,7 @@ const products = [
   {
     category: "Saree",
     price: 7700,
-    name: "Saree 4",
+    name: "Black Silk Saree with Handwork Border",
     id: "3",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -62,7 +62,7 @@ const products = [
   {
     category: "Saree",
     price: 7700,
-    name: "Saree 5",
+    name: "Multi colored Saree",
     id: "4",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -71,7 +71,7 @@ const products = [
   {
     category: "Saree",
     price: 7700,
-    name: "Saree 6",
+    name: "White and Yellow Chiffon Saree",
     id: "5",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -80,7 +80,7 @@ const products = [
   {
     category: "Saree",
     price: 7700,
-    name: "Saree 7",
+    name: "Teal Silk Saree with Handwork Border",
     id: "6",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -89,7 +89,7 @@ const products = [
   {
     category: "Saree",
     price: 7700,
-    name: "Saree 8",
+    name: "Hand Embroidered White Saree",
     id: "7",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -98,7 +98,7 @@ const products = [
   {
     category: "Kurtha",
     price: 4970,
-    name: "Kurtha 1",
+    name: "Silk Kurta Palazzo Dupatta Set",
     id: "8",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -107,7 +107,7 @@ const products = [
   {
     category: "Kurtha",
     price: 2660,
-    name: "Kurtha 2",
+    name: "Spaghetti Kurta Set",
     id: "9",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -116,7 +116,7 @@ const products = [
   {
     category: "Kurtha",
     price: 3640,
-    name: "Kurtha 3",
+    name: "Cotton Printed Kurta Set",
     id: "10",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -125,7 +125,7 @@ const products = [
   {
     category: "Kurtha",
     price: 3640,
-    name: "Kurtha 4",
+    name: "Printed Kurta with Dupatta",
     id: "11",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -134,7 +134,7 @@ const products = [
   {
     category: "Kurtha",
     price: 7700,
-    name: "Kurtha 5",
+    name: "Georgette Kurta Set",
     id: "12",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -143,7 +143,7 @@ const products = [
   {
     category: "Kurtha",
     price: 7700,
-    name: "Kurtha 6",
+    name: "A-Line Kurta Set",
     id: "13",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -152,7 +152,7 @@ const products = [
   {
     category: "Kurtha",
     price: 4970,
-    name: "Kurtha 7",
+    name: "A-Line Kurta Set",
     id: "14",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -161,7 +161,7 @@ const products = [
   {
     category: "Lehenga",
     price: 10500,
-    name: "Lehenga 1",
+    name: "Chiffon Gharara Set",
     id: "15",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -170,7 +170,7 @@ const products = [
   {
     category: "Lehenga",
     price: 10500,
-    name: "Lehenga 2",
+    name: "Chiffon Gharara Set",
     id: "16",
     description:
       "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos quibusdam saepe, eum totam numquam sunt. Magni quod repellat cupiditate accusantium accusamus non voluptas, aliquam, quaerat id, quibusdam dolorem quidem. Expedita.",
@@ -217,18 +217,18 @@ interface Store {
   };
 }
 
-const useStore: any = create((set) => ({
+const useStore: any = create(set => ({
   productStore: products,
   cartStore: [],
   pagination: {
     currentPage: 1,
     perPage: 8,
-    number: products.filter((product) => product.tag !== "BIS").length,
+    number: products.filter(product => product.tag !== "BIS").length,
   },
   addToCart: (item: Cart) =>
     set((state: Store) => {
       const duplicateIndex = state.cartStore.findIndex(
-        (obj) => obj.id === item.id
+        obj => obj.id === item.id
       );
       if (duplicateIndex !== -1) {
         const quantity =
@@ -249,7 +249,7 @@ const useStore: any = create((set) => ({
   removeFromCart: (cartId: number) =>
     set((state: Store) => {
       return {
-        cartStore: state.cartStore.filter((cart) => cart.id !== cartId), // Filter out the product with the given id}
+        cartStore: state.cartStore.filter(cart => cart.id !== cartId), // Filter out the product with the given id}
       };
     }),
   changePage: (number: number) =>
