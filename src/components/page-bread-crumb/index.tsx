@@ -12,7 +12,6 @@ import React from "react";
 
 export const PageBreadCrumb = () => {
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <div className="container mx-auto">
       <Breadcrumb>
