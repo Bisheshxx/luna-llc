@@ -12,7 +12,12 @@ export default function CartPage() {
   const {
     cartStore,
     productStore,
-  }: { cartStore: Cart[]; productStore: Product[] } = useStore();
+    removeFromCart,
+  }: {
+    cartStore: Cart[];
+    productStore: Product[];
+    removeFromCart: (id: number) => void;
+  } = useStore();
   return (
     <div className="grid max-w-3xl gap-4 px-4 mx-auto flex-1">
       <div className="flex items-center gap-4">
@@ -39,7 +44,7 @@ export default function CartPage() {
                 />
                 <div className=" gap-1.5">
                   <Link
-                    href="#"
+                    href={`/product/${productStore[cart.id].id}`}
                     className="line-clamp-2 font-medium hover:underline"
                     prefetch={false}
                   >
@@ -62,7 +67,11 @@ export default function CartPage() {
               <div className="flex flex-col items-center justify-center gap-1.5">
                 <div className="flex items-center gap-1">
                   <div className="w-20 md:w-24 sm:hidden" />
-                  <Button variant="ghost" size="icon">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => removeFromCart(cart.id)}
+                  >
                     <TrashIcon className="w-4 h-4" />
                     <span className="sr-only">Delete</span>
                   </Button>
@@ -85,7 +94,8 @@ export default function CartPage() {
                     {" "}
                     ¥{" "}
                     {cartStore.reduce(
-                      (sum: number, item: Cart) => sum + item.price,
+                      (sum: number, item: Cart) =>
+                        sum + item.price * item.quantity,
                       0
                     )}
                   </div>

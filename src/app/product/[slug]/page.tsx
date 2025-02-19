@@ -52,9 +52,7 @@ const ProductsPage = () => {
         <div className="flex items-start">
           <div className="grid gap-4">
             <h1 className="font-bold text-2xl sm:text-3xl">{product.name}</h1>
-            <div>
-              <p>{product.description}</p>
-            </div>
+            <div>{/* <p>{product.description}</p> */}</div>
           </div>
           <div className="text-4xl font-bold ml-auto">¥{product.price}</div>
         </div>

@@ -14,6 +14,7 @@ interface IProps {
 
 const CartComponent = ({ isCartOpen, toggleCart }: IProps) => {
   const { cartStore, productStore, removeFromCart } = useStore();
+  console.log(cartStore);
   return (
     <div
       className={`fixed top-0 right-0 z-50 h-full w-full max-w-md bg-background p-6 shadow-lg transition-transform duration-300 ${
@@ -64,7 +65,7 @@ const CartComponent = ({ isCartOpen, toggleCart }: IProps) => {
             <span className="font-medium">
               ¥{" "}
               {cartStore.reduce(
-                (sum: number, item: Cart) => sum + item.price,
+                (sum: number, item: Cart) => sum + item.price * item.quantity,
                 0
               )}
             </span>

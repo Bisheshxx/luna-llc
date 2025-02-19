@@ -259,7 +259,7 @@ export default function Search() {
                           {product.category}
                         </span>
                       </div>
-                      <h4 className="font-semibold">${product.price}</h4>
+                      <h4 className="font-semibold">¥{product.price}</h4>
                     </div>
                   </CardContent>
                 </Card>
